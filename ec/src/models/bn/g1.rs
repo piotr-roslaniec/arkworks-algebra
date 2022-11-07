@@ -6,11 +6,12 @@ use crate::{
 use ark_ff::bytes::ToBytes;
 use ark_std::io::{Result as IoResult, Write};
 use num_traits::Zero;
+use ark_serialize::*;
 
 pub type G1Affine<P> = GroupAffine<<P as BnParameters>::G1Parameters>;
 pub type G1Projective<P> = GroupProjective<<P as BnParameters>::G1Parameters>;
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Clone(bound = "P: BnParameters"),
     Debug(bound = "P: BnParameters"),

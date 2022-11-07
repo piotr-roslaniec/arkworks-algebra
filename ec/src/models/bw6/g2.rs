@@ -2,7 +2,7 @@ use ark_std::{
     io::{Result as IoResult, Write},
     vec::Vec,
 };
-
+use ark_serialize::*;
 use ark_ff::{
     bytes::ToBytes,
     fields::{BitIteratorBE, Field},
@@ -20,7 +20,7 @@ use crate::{
 pub type G2Affine<P> = GroupAffine<<P as BW6Parameters>::G2Parameters>;
 pub type G2Projective<P> = GroupProjective<<P as BW6Parameters>::G2Parameters>;
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Clone(bound = "P: BW6Parameters"),
     Debug(bound = "P: BW6Parameters"),
@@ -35,7 +35,7 @@ pub struct G2Prepared<P: BW6Parameters> {
     pub infinity: bool,
 }
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Clone(bound = "P: BW6Parameters"),
     Copy(bound = "P: BW6Parameters"),

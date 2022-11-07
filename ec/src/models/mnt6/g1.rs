@@ -5,11 +5,12 @@ use crate::{
 };
 use ark_ff::{bytes::ToBytes, Fp3};
 use ark_std::io::{Result as IoResult, Write};
+use ark_serialize::*;
 
 pub type G1Affine<P> = GroupAffine<<P as MNT6Parameters>::G1Parameters>;
 pub type G1Projective<P> = GroupProjective<<P as MNT6Parameters>::G1Parameters>;
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Copy(bound = "P: MNT6Parameters"),
     Clone(bound = "P: MNT6Parameters"),

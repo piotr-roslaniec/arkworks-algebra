@@ -12,12 +12,13 @@ use ark_std::{
     io::{Result as IoResult, Write},
     vec::Vec,
 };
+use ark_serialize::*;
 use num_traits::One;
 
 pub type G2Affine<P> = GroupAffine<<P as MNT4Parameters>::G2Parameters>;
 pub type G2Projective<P> = GroupProjective<<P as MNT4Parameters>::G2Parameters>;
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Clone(bound = "P: MNT4Parameters"),
     Debug(bound = "P: MNT4Parameters"),
@@ -120,7 +121,7 @@ pub(super) struct G2ProjectiveExtended<P: MNT4Parameters> {
     pub(crate) t: Fp2<P::Fp2Params>,
 }
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Clone(bound = "P: MNT4Parameters"),
     Debug(bound = "P: MNT4Parameters"),
@@ -134,7 +135,7 @@ pub struct AteDoubleCoefficients<P: MNT4Parameters> {
     pub c_l: Fp2<P::Fp2Params>,
 }
 
-#[derive(Derivative)]
+#[derive(Derivative, CanonicalSerialize, CanonicalDeserialize)]
 #[derivative(
     Clone(bound = "P: MNT4Parameters"),
     Debug(bound = "P: MNT4Parameters"),
